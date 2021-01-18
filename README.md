@@ -1,7 +1,7 @@
 # 시작하기
 
 ## 블루 그린 배포 순서
-![Alt text](img\blue_green_deploy_for_docker.JPG)
+![Alt text](./img\blue_green_deploy_for_docker.JPG)
 
 ## 블루 그린 배포 과정
 ![Alt text](img\build_deploy.JPG)
