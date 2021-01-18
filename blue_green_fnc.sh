@@ -43,13 +43,13 @@ TARGET_PORT=8080
 # INSTANCE는 toggle_port_number 함수에 의해 결정된다.
 INSTANCE=0
 
-# 현재 BLUE_INSTANCE이면 GREEN_INSTANCE로 설정, 현재 포GREEN_INSTANCE면 BLUE_INSTANCE로 설정
+# 현재 BLUE_INSTANCE이면 GREEN_INSTANCE로 설정, 현재 GREEN_INSTANCE면 BLUE_INSTANCE로 설정
 toggle_port_number()
 {
   if [[ $(EXIST_BLUE) == ${BLUE_INSTANCE} ]]; then
       echo "> Select Instance ${GREEN_INSTANCE}"
       INSTANCE=${GREEN_INSTANCE}
-  elif [[ $(EXIST_GREEN) == ${GREEN_INSTANCE} ]]; then             
+  elif [[ $(EXIST_GREEN) == ${GREEN_INSTANCE} ]]; then
       echo "> Select Instance ${BLUE_INSTANCE}"
       INSTANCE=${BLUE_INSTANCE}
   else
