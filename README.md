@@ -1,2 +1,36 @@
-# nginx_blue_green_deploy_for_docker
-docker   "--network-alias" 기반의 블루 그린 배포 스크립트
+# 시작하기
+
+## 블루 그린 배포 순서
+![alt text](img\blue_green_deploy_for_docker.JPG)
+
+## 블루 그린 배포 과정
+![alt text](img\build_deploy.JPG)
+
+1. docker bridge network 생성
+```
+docker network create educon_network
+```
+
+2. upload script
+> blue_green_fnc.sh, run_new_was.sh, start.sh
+
+3. Jenkins pipline
+```
+...
+stage('Docker Deploy') {
+    if (useDeploy) {
+        println "Docker Deploy"
+
+        try {
+            println "Docker Pull"
+            sh """
+            ssh -p 16215 -o StrictHostKeyChecking=no test@example.com << ENDSSH
+            docker login ${ACR_SERVER} -u ${ACR_ID} -p ${ACR_PASSWORD}
+            docker pull ${ACR_SERVER}/front:${BUILD_NUMBER}
+            ./start.sh
+ENDSSH"""
+...
+```
+
+4. Jenkins pipeline deploy
+![alt text](img\build_deploy_jenkins_pipeline.JPG)
