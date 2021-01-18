@@ -7,16 +7,16 @@ GREEN_INSTANCE="front_web"
 # Docker Host IP or Host
 HOST="127.0.0.1"
 
-# 현재 nginx에서 proxypass 인스턴스 정보(ex: set $service_url http://${HOST}:8081;)
+# 현재 nginx에서 proxypass 주소 정보(ex: set $service_url http://${HOST}:8081;)
 SERVICE_URL="nginx/service_url.inc"
 
-# 도커 레지스트리 로그인
+# 도커 레지스트리 로그인(여기서는 Azure registry 사용)
 docker_login()
 {
   docker login hiclass.azurecr.io -u 'USER' -p 'XXXXXXX' >/dev/null 2>&1
 }
 
-# 가장 최근에 만들어진 docker image의 빌드넘버 찾기
+# 가장 최근에 만들어진 docker image의 태그 빌드넘버 찾기(ex: hiclass.azureecr.io/fromt:latest)
 BUILD_NUMBER()
 {
   docker image ls| grep hiclass.azurecr.io/front |awk '{print $2}' | head -1
@@ -43,13 +43,13 @@ TARGET_PORT=8080
 # INSTANCE는 toggle_port_number 함수에 의해 결정된다.
 INSTANCE=0
 
-#  Nginx service_url.inc에 설정된 port 번호를 가져온다.
+# 현재 BLUE_INSTANCE이면 GREEN_INSTANCE로 설정, 현재 포GREEN_INSTANCE면 BLUE_INSTANCE로 설정
 toggle_port_number()
 {
-  if [[ $(EXIST_BLUE) == ${BLUE_INSTANCE} ]]; then                  # 현재 BLUE_INSTANCE이면 GREEN_INSTANCE로 설정
+  if [[ $(EXIST_BLUE) == ${BLUE_INSTANCE} ]]; then
       echo "> Select Instance ${GREEN_INSTANCE}"
       INSTANCE=${GREEN_INSTANCE}
-  elif [[ $(EXIST_GREEN) == ${GREEN_INSTANCE} ]]; then              # 현재 포GREEN_INSTANCE면 BLUE_INSTANCE로 설정
+  elif [[ $(EXIST_GREEN) == ${GREEN_INSTANCE} ]]; then             
       echo "> Select Instance ${BLUE_INSTANCE}"
       INSTANCE=${BLUE_INSTANCE}
   else
