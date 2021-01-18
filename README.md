@@ -1,10 +1,10 @@
 # 시작하기
 
 ## 블루 그린 배포 순서
-![Alt text](./img\blue_green_deploy_for_docker.JPG)
+![Alt text](./img/blue_green_deploy_for_docker.JPG)
 
 ## 블루 그린 배포 과정
-![Alt text](img\build_deploy.JPG)
+![Alt text](./img/build_deploy.JPG)
 
 1. docker bridge network 생성
 ```
@@ -30,4 +30,4 @@ ENDSSH"""
 ```
 
 4. Jenkins pipeline deploy
-![Alt text](img\build_deploy_jenkins_pipeline.JPG)
+![Alt text](./img/build_deploy_jenkins_pipeline.JPG)
